@@ -1,0 +1,11 @@
+{
+  "name": "declutter",
+  "owner": {
+    "name": "Anupam Chugh",
+    "url": "https://github.com/anupamchugh"
+  },
+  "metadata": {
+    "description": "Detect workspace bloat and auto-generate .claudeignore. Fixes Claude Code freezing on large projects.",
+    "version": "1.0.0"
+  }
+}
