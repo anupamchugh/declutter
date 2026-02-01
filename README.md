@@ -4,7 +4,7 @@
 
 ## Why Archived
 
-Claude Code 2.1.27+ handles large workspaces natively. The memory hogging that inspired this tool has been fixed upstream.
+Claude Code 2.1.29+ handles large workspaces natively. The memory leak that inspired this tool was [fixed upstream](https://status.claude.com/incidents/rl6pphjrc2r4) on January 31, 2026.
 
 **Yegge Survival Score:** Below 1.0
 - Insight Compression: Low (agents know ignore patterns)
@@ -73,4 +73,4 @@ MIT
 ---
 
 *Archived: 2026-02-01*
-*Sunset reason: Claude Code fixed memory issues natively*
+*Sunset reason: [Claude Code 2.1.29 fixed memory leak](https://status.claude.com/incidents/rl6pphjrc2r4)*
