@@ -6,10 +6,18 @@
 
 Claude Code 2.1.29+ handles large workspaces natively. The memory leak that inspired this tool was [fixed upstream](https://status.claude.com/incidents/rl6pphjrc2r4) on January 31, 2026.
 
-**Yegge Survival Score:** Below 1.0
-- Insight Compression: Low (agents know ignore patterns)
-- Broad Utility: Low (only Claude + large workspaces + freezing = triple-and)
-- See full analysis: Applied Steve Yegge's Software Survival 3.0 framework
+**Yegge Survival Score:** 0.8 (Below threshold)
+
+| Lever | Score | Reason |
+|-------|-------|--------|
+| Insight Compression | Low | Agents already know ignore patterns |
+| Substrate Efficiency | High | Pure CPU file scanning, no inference |
+| Broad Utility | **Low** | Triple-AND: Claude + large workspace + freezing |
+| Low Friction | Medium | Easy CLI, but why bother now? |
+| Awareness | Low | Nobody knew it existed |
+| Human Coefficient | Low | Solo project, no community |
+
+**Killer:** Broad Utility. When the bug was fixed, 2/3 of the market vanished.
 
 ## Historical Context
 
@@ -24,13 +32,37 @@ The tool detected bloat and auto-generated `.claudeignore` files.
 
 If resurrecting this concept, pivot to higher-survival alternatives:
 
-| Pivot | Why It Survives |
-|-------|-----------------|
-| **@context-budget** | Token cost per file/directory for ANY LLM tool |
-| **Universal .ignore** | Generate ignores for git, docker, cursor, copilot, etc. |
-| **Codebase Tokenizer** | Compare two codebases for token efficiency |
+### @context-budget — Token Cost Calculator
 
-These have broader utility than "Claude + large workspace + freezing."
+| Lever | Score | Why |
+|-------|-------|-----|
+| Insight Compression | **High** | "This folder costs 50k tokens" is novel |
+| Substrate Efficiency | High | CPU tokenizer, no inference |
+| Broad Utility | **High** | Works with ANY LLM tool (Claude, Cursor, Copilot, GPT) |
+| Low Friction | High | Drop-in CLI or VS Code extension |
+| **Yegge Score** | **1.4** | **SURVIVES** |
+
+### Universal .ignore Generator
+
+| Lever | Score | Why |
+|-------|-------|-----|
+| Insight Compression | Medium | Pattern libraries exist, but unified is new |
+| Substrate Efficiency | High | Pure CPU pattern matching |
+| Broad Utility | **High** | Git, Docker, Cursor, Copilot, Claude, Prettier... |
+| Low Friction | High | One command, all ignores |
+| **Yegge Score** | **1.2** | **SURVIVES** |
+
+### Codebase Tokenizer (Diff Tool)
+
+| Lever | Score | Why |
+|-------|-------|-----|
+| Insight Compression | **High** | "Repo A costs 2x more than Repo B" is actionable |
+| Substrate Efficiency | High | CPU comparison |
+| Broad Utility | Medium | Useful for LLM cost optimization |
+| Low Friction | Medium | Needs two repos to compare |
+| **Yegge Score** | **1.1** | **SURVIVES** |
+
+All three survive because they solve *permanent* problems (token costs, ignore patterns) not *temporary* bugs.
 
 ## Original Functionality
 
