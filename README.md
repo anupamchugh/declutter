@@ -1,111 +1,47 @@
-# Declutter
+# Declutter (Archived)
 
-Detect workspace bloat and auto-generate `.claudeignore` for Claude Code.
+> **Status:** SUNSET - This tool solved a problem that no longer exists.
 
-**Requires:** Skill + MCP server working together.
+## Why Archived
 
-## Problem
+Claude Code 2.1.27+ handles large workspaces natively. The memory hogging that inspired this tool has been fixed upstream.
 
-Claude Code freezes on large workspaces because it indexes everything:
+**Yegge Survival Score:** Below 1.0
+- Insight Compression: Low (agents know ignore patterns)
+- Broad Utility: Low (only Claude + large workspaces + freezing = triple-and)
+- See full analysis: Applied Steve Yegge's Software Survival 3.0 framework
+
+## Historical Context
+
+Built January 2026 when Claude Code would freeze on workspaces with:
 - 938MB log files
 - 1GB+ node_modules
 - 500MB Python venvs
-- Database files, build caches, coverage reports
 
-## Solution
+The tool detected bloat and auto-generated `.claudeignore` files.
 
-A skill + MCP tool that scans for bloat, estimates wasted tokens, and creates `.claudeignore`:
+## What Survives (Pivot Ideas)
+
+If resurrecting this concept, pivot to higher-survival alternatives:
+
+| Pivot | Why It Survives |
+|-------|-----------------|
+| **@context-budget** | Token cost per file/directory for ANY LLM tool |
+| **Universal .ignore** | Generate ignores for git, docker, cursor, copilot, etc. |
+| **Codebase Tokenizer** | Compare two codebases for token efficiency |
+
+These have broader utility than "Claude + large workspace + freezing."
+
+## Original Functionality
 
 ```
 @declutter              # Scan workspace, show report
 @declutter --fix        # Scan + create .claudeignore
 ```
 
-## Installation
+Detected: node_modules, .venv, target/, .build/, DerivedData/, *.log, *.db
 
-### 1. Install MCP Server
-
-```bash
-pip install fastmcp
-```
-
-### 2. Add to Claude Config
-
-Add to `~/.claude/mcp_servers.json`:
-
-```json
-{
-  "declutter": {
-    "command": "fastmcp",
-    "args": ["run", "/path/to/declutter/mcp/server.py"]
-  }
-}
-```
-
-### 3. Install Skill
-
-Copy `skills/declutter/SKILL.md` to `~/.claude/skills/declutter/`
-
-Or install as plugin:
-```bash
-claude plugins add anupamchugh/declutter
-```
-
-### 4. Restart Claude Code
-
-## Example
-
-```
-@declutter
-
-Scanning workspace...
-
-| Project | Type | Bloat | Status |
-|---------|------|-------|--------|
-| webapp | node | 1.2GB | ✗ needs fix |
-| api | python | 400MB | ✓ exists |
-
-1 project needs .claudeignore. Fix it?
-
-> yes
-
-✓ webapp/.claudeignore created (5 patterns)
-Restart Claude to apply.
-```
-
-## MCP Tool
-
-```python
-mcp__declutter__declutter(path=".", fix=False)
-```
-
-| Param | Type | Default | Description |
-|-------|------|---------|-------------|
-| path | str | "." | Project path to scan |
-| fix | bool | False | Create .claudeignore if True |
-
-## What Gets Detected
-
-| Marker | Type | Ignores |
-|--------|------|---------|
-| requirements.txt | Python | .venv/, __pycache__/, *.pyc |
-| package.json | Node | node_modules/, .next/, dist/ |
-| Package.swift | Swift | .build/, DerivedData/ |
-| Cargo.toml | Rust | target/ |
-| go.mod | Go | vendor/ |
-
-Plus: *.log, *.db, *.parquet, htmlcov/
-
-## Token Math
-
-```
-Tokens wasted ≈ bloat_bytes / 4
-
-Example:
-5GB bloat = 1.25 billion tokens that could be used for actual code
-```
-
-## Architecture
+## Architecture (Historical)
 
 ```
 ┌─────────────────────────────────┐
@@ -113,7 +49,6 @@ Example:
 │         (Skill)                 │
 │  - Workflow orchestration       │
 │  - User interaction             │
-│  - Approval flow                │
 └───────────────┬─────────────────┘
                 │
                 ▼
@@ -121,11 +56,21 @@ Example:
 │   mcp__declutter__declutter     │
 │         (MCP Tool)              │
 │  - Project detection            │
-│  - Size calculation             │
 │  - .claudeignore generation     │
 └─────────────────────────────────┘
 ```
 
+## Lessons Learned
+
+1. **Build for durability, not urgency** - Tools that fix temporary problems die when the problem is fixed
+2. **Yegge's framework works** - "Crazy to re-synthesize" is the right bar
+3. **Substrate efficiency alone isn't enough** - CPU file scanning is cheap, but narrow utility kills survival
+
 ## License
 
 MIT
+
+---
+
+*Archived: 2026-02-01*
+*Sunset reason: Claude Code fixed memory issues natively*
